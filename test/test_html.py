@@ -1,0 +1,211 @@
+# from unittest.case import TestCase
+import json
+from unittest.mock import Mock
+import re
+
+from bs4 import BeautifulSoup
+from django.test.testcases import TestCase
+
+from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
+from tuitse.html import KiamTsaNuaUi
+
+
+class ThongKueTshiGiam(TestCase):
+
+    def _mock_hamsik(self, tinliat):
+        mock = Mock()
+        mock.檢查 = json.dumps(tinliat)
+        return KiamTsaNuaUi().檢查結果(mock)
+
+    def test_ok(self):
+        kiatko = self._mock_hamsik([
+            ('好', 'hó', THAU_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            soup.ruby.rb.string, 'hó'
+        )
+
+    def test_nng_su(self):
+        kiatko = self._mock_hamsik([
+            ('真', 'tsin', THAU_JI, True),
+            ('好', 'hó', THAU_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rb')), 2
+        )
+
+    def test_siangji_e_lomaji(self):
+        kiatko = self._mock_hamsik([
+            ('姑', 'koo', THAU_JI, True),
+            ('娘', 'niû', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rb')), 3
+        )
+
+    def test_siangji_e_hanji(self):
+        kiatko = self._mock_hamsik([
+            ('姑', 'koo', THAU_JI, True),
+            ('娘', 'niû', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rt')), 3
+        )
+
+    def test_khinsiann_hu(self):
+        kiatko = self._mock_hamsik([
+            ('轉', 'tńg', THAU_JI, True),
+            ('去', 'khì', KHIN_SIANN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rb')), 3
+        )
+
+    def test_tsuanlo_su(self):
+        kiatko = self._mock_hamsik([
+            ('koo', 'koo', THAU_JI, True),
+            ('niu', 'niu', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rb')), 3
+        )
+
+    def test_khinsiann_e_tsuanlo_su(self):
+        kiatko = self._mock_hamsik([
+            ('tńg', 'tńg', THAU_JI, True),
+            ('khì', 'khì', KHIN_SIANN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+    def test_hanlo_su_e_hanji(self):
+        kiatko = self._mock_hamsik([
+            ('芳', 'phang', THAU_JI, True),
+            ('kòng', 'kòng', LIAN_JI, True),
+            ('kòng', 'kòng', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+    def test_hanlo_su_e_lomaji(self):
+        kiatko = self._mock_hamsik([
+            ('芳', 'phang', THAU_JI, True),
+            ('kòng', 'kòng', LIAN_JI, True),
+            ('kòng', 'kòng', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+    def test_kinnkinn叫_e_hanji(self):
+        kiatko = self._mock_hamsik([
+            ('kinn', 'kinn', THAU_JI, True),
+            ('kinn', 'kinn', LIAN_JI, True),
+            ('叫', '叫', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+    def test_kinnkinn叫_e_lomaji(self):
+        kiatko = self._mock_hamsik([
+            ('kinn', 'kinn', THAU_JI, True),
+            ('kinn', 'kinn', LIAN_JI, True),
+            ('叫', '叫', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+    def test_tsuanhan_su(self):
+        kiatko = self._mock_hamsik([
+            ('帥', '帥', THAU_JI, True),
+            ('哥', '哥', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('ruby')), 1
+        )
+
+
+class KingKoTshiGiam(TestCase):
+    def _mock_hamsik(self, tinliat):
+        mock = Mock()
+        mock.檢查 = json.dumps(tinliat)
+        return KiamTsaNuaUi().檢查結果(mock)
+
+    def test_khiam_hanji(self):
+        kiatko = self._mock_hamsik([
+            ('', 'hó', THAU_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(soup.find_all('rt')[0]['class'], ['fail'])
+
+    def test_khiam_lomaji(self):
+        kiatko = self._mock_hamsik([
+            ('好', '', THAU_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(soup.find_all('rb')[0]['class'], ['fail'])
+
+    def test_khiam_bue(self):
+        kiatko = self._mock_hamsik([
+            ('姑', 'koo', THAU_JI, True),
+            ('娘', '', LIAN_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertNotIn('class', soup.find_all('rb')[0])
+        self.assertEqual(soup.find_all('rb')[2]['class'], ['fail'])
+
+    def test_khiam_tiongng(self):
+        kiatko = self._mock_hamsik([
+            ('歡', 'huann', THAU_JI, True),
+            ('歡', '', LIAN_JI, True),
+            ('喜', 'hí', LIAN_JI, True),
+            ('喜', '', THAU_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        lomaji = ''
+        for rb in soup.ruby.find_all('rb'):
+            lomaji += re.sub(r'\s', ' ', rb.text)
+        self.assertEqual(lomaji, 'huann  hí')
+
+    def test_bo_tuitang(self):
+        kiatko = self._mock_hamsik([
+            ('好', 'bái', THAU_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(soup.find_all('rb')[0]['class'], ['fail'])
+
+    def test_tiongng_bo_tuitang(self):
+        kiatko = self._mock_hamsik([
+            ('行', 'kiânn', THAU_JI, True),
+            ('轉', 'ng', KHIN_SIANN_JI, False),
+            ('去', 'i', LIAN_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertNotIn('class', soup.find_all('rb')[0])
+        self.assertEqual(soup.find_all('rb')[2]['class'], ['fail'])
+        self.assertEqual(soup.find_all('rb')[4]['class'], ['fail'])
+
+    def test_lianjihu_mai_laklohlai(self):
+        kiatko = self._mock_hamsik([
+            ('tánn', '', THAU_JI, False),
+            ('pān', '', LIAN_JI, False),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        khangpeh = soup.find_all('rb')[1].text
+        self.assertEqual(len(khangpeh), 1)
