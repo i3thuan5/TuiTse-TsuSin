@@ -13,3 +13,12 @@ install:
 - pip install tox
 script:
 - tox -e $TOX_ENV
+deploy:
+  provider: pypi
+  skip_cleanup: true
+  user: sih4sing5hong5
+  password:
+    secure: IhMyCDXR+jq8/Rgu1XpK2mDQ+Vx6qIA6AG2s2mL4zr7Ih/npH9TVC1rlAUaaBKHY8Ykph9v9josZi/O/aLXQdXv9Aa66hHJMZXor2ugMndyEOp004n1rv7SPXssf3KXt83ezuLfEpNcP9c3K1OiFAj+Bt4K5GG0FMMQtguiTC19K4pBq4byDFT59xFL8bCS/jqid44UcsCKr9oYtyUfiOH0eRCos3e1Wns6tRvD0EKjB0CqunhW1l6sld5rv89+zMVOEm0yzgRDYLXO5UoqQrFYF2SgiT+lICObSuWwIJgdQ8m6D2dJPNlqwXjnj8alOf19aSOj3j5lDAVL2LHrMlarjiWcTUZtt+gEdnzvbN/b+J1cDg35LSAY9Mx41057sI3JQSQYq8gUwymWtGPqWN4KdEAbME8hS6djvtfDsnOzGQsMNn8ncoKWhiAEoh16nKB4Fx3ToCjC+0sXrQGCql3AaxZLm6G6iudkfyHBvkX5uIhjFayYhTGIzy4/CdMMuz6wqCcYjpAk5YtxLshZU/0+TfAOcgbSdMlWdy4nBIjbcoyPJO42Iuff5hAwuHCDBr5w/j78v6BekcUuilL/z1DpxuuXYXga3F8dogsgw33cWVgYNjrmOJ//UzpT/XT3c10FCBBKGcgKZ/RsDwZQIf+Io2XeSb5F4UWxnItk68Cg=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
