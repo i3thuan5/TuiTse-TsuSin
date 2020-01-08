@@ -1,7 +1,7 @@
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 from 用字.models import 用字表
-from tuitse import THAU_JI, KHIN_SIANN_JI, LIAN_JI
+from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
 def kiamtsa(hanji, lomaji):

@@ -1,6 +1,7 @@
 from django.test.testcases import TestCase
-from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
+
 from tuitse import kiamtsa
+from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
 
 
 class KangJiSooTshiGiam(TestCase):
