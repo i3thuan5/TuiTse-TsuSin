@@ -81,6 +81,7 @@ class KiamTsaNuaUi():
         if ji[3]:
             return "<rb>{}</rb><rt>{}</rt>".format(ji[1], ji[0])
         if ji[1]:
-            return "<rb class='fail'>{}</rb><rt class='fail'>{}</rt>".format(ji[1], ji[0])
+            return "<rb class='fail'>{}</rb><rt class='fail'>{}</rt>".format(
+                ji[1], ji[0])
         return "<rb class='fail'>&nbsp;&nbsp;</rb><rt class='fail'>{}</rt>".format(
             ji[0])
