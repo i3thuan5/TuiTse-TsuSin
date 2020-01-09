@@ -70,7 +70,7 @@ def tuitse_html(kiamtsa_tinliat):
     html += "<ruby>{}</ruby>".format(htmlsu)
     return format_html(html)
 
-def _sng_ji_html(self, ji):
+def _sng_ji_html(ji):
     if ji[3]:
         return "<rb>{}</rb><rt>{}</rt>".format(ji[1], ji[0])
     if ji[1]:
