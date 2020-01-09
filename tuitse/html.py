@@ -2,8 +2,7 @@ from django.utils.html import format_html
 from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
 from 臺灣言語工具.基本物件.公用變數 import 敢是拼音字元
 
- 
-    
+
 def tuitse_html(kiamtsa_tinliat):
     html = ''
     htmlsu = ''
@@ -69,6 +68,7 @@ def tuitse_html(kiamtsa_tinliat):
     # Thòo bué sû ê html
     html += "<ruby>{}</ruby>".format(htmlsu)
     return format_html(html)
+
 
 def _sng_ji_html(ji):
     if ji[3]:
