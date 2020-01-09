@@ -9,7 +9,7 @@ setup(
     long_description='共兩句漢羅對--起-來，掠出字數落勾ê位a̍h-sī無合教典ê用字',
     packages=['tuitse'],
     version=PANPUN,
-    author='Sih Sîng-hông',
+    author='Tshuà Bûn-lī',
     author_email='ithuan@ithuan.tw',
     url='https://ithuan.tw/',
     download_url='https://github.com/i3thuan5/TuiTse-TsuSin',
