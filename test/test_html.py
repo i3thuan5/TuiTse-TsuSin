@@ -131,7 +131,7 @@ class TanGuanTshiGiam(TestCase):
         )
 
     '''
-    Ē-té sī lak-jī kah tîng-tânn 
+    Ē-té sī lak-jī kah tîng-tânn
     '''
 
     def test_khiam_hanji(self):
