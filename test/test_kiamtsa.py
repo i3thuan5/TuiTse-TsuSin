@@ -9,7 +9,8 @@ class MockTshigiam(TestCase):
         hanji = '「'
         lomaji = 'ˮ'
 
-        def hamsik_tsitji_ubo(x): return True
+        def hamsik_tsitji_ubo(x):
+            return True
         kiatko = kiamtsa(hanji, lomaji, hamsik_tsitji_ubo)
         self.assertTrue(kiatko[0][3])
 
