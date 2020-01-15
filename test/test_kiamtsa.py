@@ -1,7 +1,17 @@
 from django.test.testcases import TestCase
-
-from tuitse import kiamtsa
 from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
+from tuitse import kiamtsa
+
+
+class MockTshigiam(TestCase):
+
+    def test_u_tsitji(self):
+        hanji = '「'
+        lomaji = 'ˮ'
+
+        def hamsik_tsitji_ubo(x): return True
+        kiatko = kiamtsa(hanji, lomaji, hamsik_tsitji_ubo)
+        self.assertTrue(kiatko[0][3])
 
 
 class KangJiSooTshiGiam(TestCase):

@@ -1,14 +1,8 @@
-# from unittest.case import TestCase
-import json
-from unittest.mock import Mock
-import re
-
 from bs4 import BeautifulSoup
 from django.test.testcases import TestCase
-
 from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
-from tuitse.widget import KiamTsaNuaUi
 from tuitse.html import tuitse_html
+import re
 
 
 class TanGuanTshiGiam(TestCase):
@@ -136,12 +130,9 @@ class TanGuanTshiGiam(TestCase):
             len(soup.find_all('ruby')), 1
         )
 
-
-class KingKoTshiGiam(TestCase):
-    def _mock_hamsik(self, tinliat):
-        mock = Mock()
-        mock.檢查 = json.dumps(tinliat)
-        return KiamTsaNuaUi().檢查結果(mock)
+    '''
+    Ē-té sī lak-jī kah tîng-tânn 
+    '''
 
     def test_khiam_hanji(self):
         kiatko = tuitse_html([

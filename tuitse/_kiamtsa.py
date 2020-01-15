@@ -4,7 +4,7 @@ from 用字.models import 用字表
 from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
-def kiamtsa(hanji, lomaji):
+def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
     kubut_han = 拆文分析器.建立句物件(hanji)
     kubut_lo = 拆文分析器.建立句物件(lomaji)
     jibut_han = kubut_han.篩出字物件()
@@ -39,12 +39,15 @@ def kiamtsa(hanji, lomaji):
         ):
             try:
                 jibut = 拆文分析器.建立字物件(han.型, lo.型)
-            except 解析錯誤:
+            except 解析錯誤 as e:
+                print('解析錯誤, ', e)
                 kam_u = False
             else:
                 kam_u = (用字表.有這个字無(jibut) or (
                     han.型 == lo.型 and not kam_alapik_sooji(jibut.型, jibut.音))
                 )
+                if hamsik_tsitji_ubo:
+                    kam_u = kam_u or hamsik_tsitji_ubo(jibut)
             toping = tsua_dp[-1]
             if kam_u:
                 hah_tshu = (tshu[0] + 1, tshu[1])
