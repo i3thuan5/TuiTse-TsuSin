@@ -1,5 +1,5 @@
 from tuitse import kiamtsa
-from tuitse.boolean import tuitse_boolean
+from tuitse import tuitse_boolean
 from django.test.testcases import TestCase
 
 
