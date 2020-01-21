@@ -24,3 +24,4 @@ deploy:
   on:
     tags: true
     distributions: sdist bdist_wheel
+    condition: $TOX_ENV = test
