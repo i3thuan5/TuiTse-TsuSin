@@ -2,6 +2,7 @@ from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 from 用字.models import 用字表
 from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
+from datetime import datetime
 
 
 def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
@@ -30,13 +31,21 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
     for _punso in range(huinn_tngte + 1):
         dp_tin[0].append((0, 0))
         loo_tin[0].append('toping')
-
-    for lo in jibut_lo:
+    khaisi = datetime.now()
+    for i, lo in enumerate(jibut_lo):
+        print('ting 1-ê羅馬字開{}'.format(datetime.now() - khaisi))
+        print('羅馬字第{}/{}字'.format(i, len(jibut_han)))
         tsua_dp = [(0, 0), ]
         tsua_loo = ['binting', ]
+        j = 0
+        khaisi = datetime.now()
+
         for binting, tshu, han in zip(
             dp_tin[-1][1:], dp_tin[-1], jibut_han
         ):
+            # print('漢字第{}字'.format(j))
+            # print(datetime.now() - khaisi)
+            j += 1
             try:
                 jibut = 拆文分析器.建立字物件(han.型, lo.型)
             except 解析錯誤 as e:
@@ -48,6 +57,8 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
                 )
                 if hamsik_tsitji_ubo:
                     kam_u = kam_u or hamsik_tsitji_ubo(jibut)
+            # print('建立字物件')
+            # print(datetime.now() - khaisi)
             toping = tsua_dp[-1]
             if kam_u:
                 hah_tshu = (tshu[0] + 1, tshu[1])
@@ -72,6 +83,8 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
                 else:
                     tsua_dp.append(behah_tshu)
                     tsua_loo.append('behah_tshu')
+            # print('tui-ji')
+            # print(datetime.now() - khaisi)
         dp_tin.append(tsua_dp)
         loo_tin.append(tsua_loo)
     # Se̍h-thâu khuànn siáng ū tuì--tio̍h
@@ -79,6 +92,9 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
     tit = len(loo_tin) - 1
     huinn = len(loo_tin[0]) - 1
     ting_id = THAU_JI
+    print('sng bang-loo too')
+    i = 0
+    khaisi = datetime.now()
     while tit > 0 or huinn > 0:
         if loo_tin[tit][huinn] == 'binting':
             tit -= 1
@@ -117,6 +133,7 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
                 False
             ))
             ting_id = ji_id_tin[tit]
+    print('khai {} bio'.format(datetime.now() - khaisi))
     kiat_ko.reverse()
     return kiat_ko
 
