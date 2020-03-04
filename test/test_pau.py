@@ -42,7 +42,7 @@ class TshiGiam(TestCase):
                     'lomaji': 'á',
                     'si_tioh': True
                 }, {
-                    'hanji': '-',
+                    'hanji': '\u00A0',
                     'lomaji': '-',
                     'si_tioh': True
                 }, {
