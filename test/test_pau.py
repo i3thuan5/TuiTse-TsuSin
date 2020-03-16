@@ -52,3 +52,47 @@ class TshiGiam(TestCase):
                 }
             ]
         ]
+
+    def test_soojitiau_lianjihu(self):
+        self.guan = [
+            ('會', 'e7', 1, True), ('當', 'tang3', 2, True),
+        ]
+        self.bang = [
+            [
+                {
+                    'hanji': '會',
+                    'lomaji': 'e7',
+                    'si_tioh': True
+                }, {
+                    'hanji': '\u00A0',
+                    'lomaji': '-',
+                    'si_tioh': True
+                }, {
+                    'hanji': '當',
+                    'lomaji': 'tang3',
+                    'si_tioh': True
+                }
+            ]
+        ]
+
+    def test_lianjihu(self):
+        self.guan = [
+            ('會', 'ē', 1, True), ('當', 'tàng', 2, True),
+        ]
+        self.bang = [
+            [
+                {
+                    'hanji': '會',
+                    'lomaji': 'ē',
+                    'si_tioh': True
+                }, {
+                    'hanji': '\u00A0',
+                    'lomaji': '-',
+                    'si_tioh': True
+                }, {
+                    'hanji': '當',
+                    'lomaji': 'tàng',
+                    'si_tioh': True
+                }
+            ]
+        ]

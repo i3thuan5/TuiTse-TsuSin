@@ -55,8 +55,6 @@ def pau(jitin):
                 'lomaji': lomaji,
                 'si_tioh': ji[3]
             }
-        elif lui == KHIN_SIANN_JI:
-            pass
         su.append(sin)
         ting_hing_si_lomaji = hing_si_lomaji
         ting_im_si_lomaji = im_si_lomaji
