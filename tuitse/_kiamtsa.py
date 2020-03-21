@@ -5,6 +5,7 @@ from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
 def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
+    表 = 用字表.這馬()
     kubut_han = 拆文分析器.建立句物件(hanji)
     kubut_lo = 拆文分析器.建立句物件(lomaji)
     jibut_han = kubut_han.篩出字物件()
@@ -30,10 +31,10 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
     for _punso in range(huinn_tngte + 1):
         dp_tin[0].append((0, 0))
         loo_tin[0].append('toping')
-
     for lo in jibut_lo:
         tsua_dp = [(0, 0), ]
         tsua_loo = ['binting', ]
+
         for binting, tshu, han in zip(
             dp_tin[-1][1:], dp_tin[-1], jibut_han
         ):
@@ -43,7 +44,7 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
                 print('解析錯誤, ', e)
                 kam_u = False
             else:
-                kam_u = (用字表.有這个字無(jibut) or (
+                kam_u = (表.有這个字無(jibut) or (
                     han.型 == lo.型 and not kam_alapik_sooji(jibut.型, jibut.音))
                 )
                 if hamsik_tsitji_ubo:
