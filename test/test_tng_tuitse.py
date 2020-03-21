@@ -7,9 +7,7 @@ from tuitse.html import tuitse_html
 class TuaLiongTuiTse(TestCase):
 
     def test_tuitse(self):
-        print('khai-si tui-tse')
         tsusin = kiamtsa(self.hanji, self.lomaji)
-        print('khai-si ue html')
         tuitse_html(tsusin)
 
     hanji = (
