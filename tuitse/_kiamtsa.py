@@ -4,7 +4,7 @@ from 用字 import 建議
 from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
-def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio = 建議):
+def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
     kubut_han = 拆文分析器.建立句物件(hanji)
     kubut_lo = 拆文分析器.建立句物件(lomaji)
     jibut_han = kubut_han.篩出字物件()
