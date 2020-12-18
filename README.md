@@ -46,7 +46,7 @@ from tuitse import kiamtsa
 
 kiatko = kiamtsa('雞蛋', 'ke-nn̄g')
 ```
-是傳一份json轉來，生做按呢：
+是傳一份json轉--來，生做按呢：
 ```
 [
     ('雞', 'ke', 1, True), ('蛋', 'nn̄g', 2, False)
