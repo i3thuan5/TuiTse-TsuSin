@@ -130,6 +130,17 @@ class TanGuanTshiGiam(TestCase):
             len(soup.find_all('ruby')), 1
         )
 
+    def test_khinsiann(self):
+        kiatko = tuitse_html([
+            ('禁', 'kìm', THAU_JI, True),
+            ('起', '--khí', KHIN_SIANN_JI, True),
+            ('來', 'lâi', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(
+            len(soup.find_all('rb')), 3
+        )
+
     '''
     Ē-té sī lak-jī kah tîng-tânn
     '''

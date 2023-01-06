@@ -57,7 +57,7 @@ class KangJiSooTshiGiam(TestCase):
         self.lomaji = 'kiânn--ng-i'
         self.bang = [
             ('行', 'kiânn', THAU_JI, True),
-            ('轉', 'ng', KHIN_SIANN_JI, False),
+            ('轉', '--ng', KHIN_SIANN_JI, False),
             ('去', 'i', LIAN_JI, False),
         ]
 
