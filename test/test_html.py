@@ -97,11 +97,11 @@ class TanGuanTshiGiam(TestCase):
         kiatko = tuitse_html([
             ('kinn', 'kinn', THAU_JI, True),
             ('kinn', 'kinn', LIAN_JI, True),
-            ('叫', '叫', LIAN_JI, True),
+            ('叫', '叫', THAU_JI, True),
         ])
         soup = BeautifulSoup(kiatko, "html.parser")
         self.assertEqual(
-            len(soup.find_all('ruby')), 1
+            len(soup.find_all('ruby')), 2
         )
 
     def test_kinnkinn叫_e_lomaji(self):
