@@ -51,11 +51,14 @@ def tuitse_html(kiamtsa_tinliat):
             raise RuntimeError('一定愛設定頭字、連字、a̍h-sī輕聲')
 
         if kam_im_ai_lian:
-            htmlsu += "<rt>{}</rt>".format(tiauhu)
             htmlsu += "<rb>{}</rb>".format(tiauhu)
         else:
-            htmlsu += "<rt></rt>"
             htmlsu += "<rb>&nbsp;</rb>"
+
+        if kam_hing_ai_lian:
+            htmlsu += "<rt>{}</rt>".format(tiauhu)
+        else:
+            htmlsu += "<rt></rt>"
 
         htmlsu += _sng_ji_html(ji)
     # Thòo bué sû ê html
