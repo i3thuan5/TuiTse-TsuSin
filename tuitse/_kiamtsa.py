@@ -120,12 +120,17 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
     kiat_ko.reverse()
     siongbue = []
     for ji in kiat_ko:
-        if ji[1].startswith('--'):
-            siongbue.append((
-                ji[0], ji[1][2:], ji[2], ji[3]
-            ))
+        if ji[0].startswith('--'):
+            han = ji[0][2:]
         else:
-            siongbue.append(ji)
+            han = ji[0]
+        if ji[1].startswith('--'):
+            lo = ji[1][2:]
+        else:
+            lo = ji[1]
+        siongbue.append((
+            han, lo, ji[2], ji[3]
+        ))
     return siongbue
 
 

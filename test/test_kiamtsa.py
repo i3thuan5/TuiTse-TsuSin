@@ -98,6 +98,14 @@ class KangJiSooTshiGiam(TestCase):
             ('「', ',', THAU_JI, False),
         ]
 
+    def test_han_ma_khinsiann(self):
+        self.hanji = '予--in'
+        self.lomaji = 'hōo--in'
+        self.bang = [
+            ('予', 'hōo', THAU_JI, True),
+            ('in', 'in', KHIN_SIANN_JI, True),
+        ]
+
 
 class BoKangJiSooTshiGiam(TestCase):
     def tearDown(self):
