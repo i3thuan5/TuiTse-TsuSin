@@ -10,10 +10,7 @@ def tuitse_html(kiamtsa_tinliat):
     kam_ting_tsit_im_si_lomaji = False
     for ji in kiamtsa_tinliat:
         # Kuat-tīng Tsit jī ê hîng ài liân-jī-hû--bô
-        try:
-            kam_hing_si_lomaji = 敢是拼音字元(ji[0][-1])
-        except IndexError:
-            kam_hing_si_lomaji = False
+        kam_hing_si_lomaji = 敢是拼音字元(ji[0][-1:])
 
         if kam_hing_si_lomaji and kam_ting_tsit_hing_si_lomaji:
             kam_hing_ai_lian = True
@@ -23,10 +20,7 @@ def tuitse_html(kiamtsa_tinliat):
         kam_ting_tsit_hing_si_lomaji = kam_hing_si_lomaji
 
         # Kuat-tīng Tsit jī ê im ài liân-jī-hû--bô
-        try:
-            kam_im_si_lomaji = 敢是拼音字元(ji[1][-1])
-        except IndexError:
-            kam_im_si_lomaji = False
+        kam_im_si_lomaji = 敢是拼音字元(ji[1][-1:])
 
         if kam_im_si_lomaji and kam_ting_tsit_im_si_lomaji:
             kam_im_ai_lian = True
