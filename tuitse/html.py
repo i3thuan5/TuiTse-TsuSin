@@ -6,10 +6,7 @@ from 臺灣言語工具.基本物件.公用變數 import 敢是拼音字元
 def tuitse_html(kiamtsa_tinliat):
     html = ''
     htmlsu = ''
-    kam_hing_ai_lian = False
     kam_ting_tsit_hing_si_lomaji = False
-
-    kam_im_ai_lian = False
     kam_ting_tsit_im_si_lomaji = False
     for ji in kiamtsa_tinliat:
         # Kuat-tīng Tsit jī ê hîng ài liân-jī-hû--bô
@@ -46,7 +43,6 @@ def tuitse_html(kiamtsa_tinliat):
             htmlsu = _sng_ji_html(ji)
             continue
 
-        tiauhu = ''
         if ji[2] == LIAN_JI:
             tiauhu = '-'
         elif ji[2] == KHIN_SIANN_JI:
@@ -55,14 +51,11 @@ def tuitse_html(kiamtsa_tinliat):
             raise RuntimeError('一定愛設定頭字、連字、a̍h-sī輕聲')
 
         if kam_im_ai_lian:
+            htmlsu += "<rt>{}</rt>".format(tiauhu)
             htmlsu += "<rb>{}</rb>".format(tiauhu)
         else:
-            htmlsu += "<rb>&nbsp;</rb>"
-
-        if kam_hing_ai_lian:
-            htmlsu += "<rt>{}</rt>".format(tiauhu)
-        else:
             htmlsu += "<rt></rt>"
+            htmlsu += "<rb>&nbsp;</rb>"
 
         htmlsu += _sng_ji_html(ji)
     # Thòo bué sû ê html
