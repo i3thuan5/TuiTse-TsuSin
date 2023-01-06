@@ -49,7 +49,7 @@ class KangJiSooTshiGiam(TestCase):
         self.bang = [
             ('kinn', 'kinn', THAU_JI, True),
             ('kinn', 'kinn', LIAN_JI, True),
-            ('叫', '叫', LIAN_JI, True),
+            ('叫', '叫', THAU_JI, True),
         ]
 
     def test_tiongng_bo_tuitang_行轉去(self):
