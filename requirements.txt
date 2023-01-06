@@ -1,3 +1,0 @@
-kau3-tian2-iong7-ji7>=2.1.0
-
-beautifulsoup4
