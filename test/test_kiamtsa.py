@@ -43,13 +43,13 @@ class KangJiSooTshiGiam(TestCase):
             ('kòng', 'kòng', LIAN_JI, True),
         ]
 
-    def test_hanlo_kinnkinn叫(self):
+    def test_hanlo_kinnkinn叫_羅馬字有漢字代表是華文(self):
         self.hanji = 'kinn-kinn叫'
         self.lomaji = 'kinn-kinn叫'
         self.bang = [
             ('kinn', 'kinn', THAU_JI, True),
             ('kinn', 'kinn', LIAN_JI, True),
-            ('叫', '叫', LIAN_JI, True),
+            ('叫', '叫', THAU_JI, True),
         ]
 
     def test_tiongng_bo_tuitang_行轉去(self):
