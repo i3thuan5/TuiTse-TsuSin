@@ -138,7 +138,7 @@ class TanGuanTshiGiam(TestCase):
         ])
         soup = BeautifulSoup(kiatko, "html.parser")
         self.assertEqual(
-            len(soup.find_all('rb')), 3
+            len(soup.find_all('rb')), 3, kiatko
         )
 
     '''
