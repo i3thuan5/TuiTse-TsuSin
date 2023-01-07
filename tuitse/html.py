@@ -1,6 +1,6 @@
 from django.utils.html import format_html
 from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
-from 臺灣言語工具.基本物件.公用變數 import 敢是拼音字元
+from kesi.butkian.kongiong import 敢是拼音字元
 
 
 def tuitse_html(kiamtsa_tinliat):
