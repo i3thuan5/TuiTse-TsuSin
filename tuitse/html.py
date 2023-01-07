@@ -52,7 +52,7 @@ def tuitse_html(kiamtsa_tinliat):
         elif ji[2] == KHIN_SIANN_JI:
             tiauhu = '--'
         else:
-            raise('一定愛設定頭字、連字、a̍h-sī輕聲')
+            raise RuntimeError('一定愛設定頭字、連字、a̍h-sī輕聲')
 
         if kam_im_ai_lian:
             htmlsu += "<rb>{}</rb>".format(tiauhu)

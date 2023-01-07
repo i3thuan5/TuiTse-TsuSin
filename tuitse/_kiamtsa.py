@@ -118,7 +118,20 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
             ))
             ting_id = ji_id_tin[tit]
     kiat_ko.reverse()
-    return kiat_ko
+    siongbue = []
+    for ji in kiat_ko:
+        if ji[0].startswith('--'):
+            han = ji[0][2:]
+        else:
+            han = ji[0]
+        if ji[1].startswith('--'):
+            lo = ji[1][2:]
+        else:
+            lo = ji[1]
+        siongbue.append((
+            han, lo, ji[2], ji[3]
+        ))
+    return siongbue
 
 
 def kam_alapik_sooji(hanji, lomaji):
