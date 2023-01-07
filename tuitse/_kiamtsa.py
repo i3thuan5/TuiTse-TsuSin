@@ -44,8 +44,12 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
                 print('解析錯誤, ', e)
                 kam_u = False
             else:
-                kam_u = (pio.有這个字無(jibut) or (
+                hanlo_kangkhuan = (
                     han.hanlo == lo.hanlo
+                    or '--{}'.format(han.hanlo) == lo.hanlo
+                )
+                kam_u = (pio.有這个字無(jibut) or (
+                    hanlo_kangkhuan
                     and not kam_alapik_sooji(jibut.型, jibut.音)
                 ))
                 if hamsik_tsitji_ubo:
