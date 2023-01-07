@@ -45,8 +45,9 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
                 kam_u = False
             else:
                 kam_u = (pio.有這个字無(jibut) or (
-                    han.hanlo == lo.hanlo and not kam_alapik_sooji(jibut.型, jibut.音))
-                )
+                    han.hanlo == lo.hanlo
+                    and not kam_alapik_sooji(jibut.型, jibut.音)
+                ))
                 if hamsik_tsitji_ubo:
                     kam_u = kam_u or hamsik_tsitji_ubo(jibut)
             toping = tsua_dp[-1]
