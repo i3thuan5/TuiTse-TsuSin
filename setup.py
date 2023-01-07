@@ -25,7 +25,6 @@ setup(
         'Topic :: Text Processing :: Linguistic',
     ],
     install_requires=[
-        'kau3-tian2-iong7-ji7',
-        'django',
+        'kau3-tian2-iong7-ji7>=2.1.0',
     ],
 )

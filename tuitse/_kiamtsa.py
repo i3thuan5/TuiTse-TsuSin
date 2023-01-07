@@ -1,10 +1,10 @@
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
-from 用字.models import 用字表
+from 用字 import 建議
 from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
-def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
+def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
     kubut_han = 拆文分析器.建立句物件(hanji)
     kubut_lo = 拆文分析器.建立句物件(lomaji)
     jibut_han = kubut_han.篩出字物件()
@@ -30,10 +30,10 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
     for _punso in range(huinn_tngte + 1):
         dp_tin[0].append((0, 0))
         loo_tin[0].append('toping')
-
     for lo in jibut_lo:
         tsua_dp = [(0, 0), ]
         tsua_loo = ['binting', ]
+
         for binting, tshu, han in zip(
             dp_tin[-1][1:], dp_tin[-1], jibut_han
         ):
@@ -43,7 +43,7 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
                 print('解析錯誤, ', e)
                 kam_u = False
             else:
-                kam_u = (用字表.有這个字無(jibut) or (
+                kam_u = (pio.有這个字無(jibut) or (
                     han.型 == lo.型 and not kam_alapik_sooji(jibut.型, jibut.音))
                 )
                 if hamsik_tsitji_ubo:
@@ -118,7 +118,20 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None):
             ))
             ting_id = ji_id_tin[tit]
     kiat_ko.reverse()
-    return kiat_ko
+    siongbue = []
+    for ji in kiat_ko:
+        if ji[0].startswith('--'):
+            han = ji[0][2:]
+        else:
+            han = ji[0]
+        if ji[1].startswith('--'):
+            lo = ji[1][2:]
+        else:
+            lo = ji[1]
+        siongbue.append((
+            han, lo, ji[2], ji[3]
+        ))
+    return siongbue
 
 
 def kam_alapik_sooji(hanji, lomaji):
