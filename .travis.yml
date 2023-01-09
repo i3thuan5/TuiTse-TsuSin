@@ -1,7 +1,8 @@
-dist: xenial
+dist: jammy
 language: python
 python:
-- '3.6'
+- '3.8'
+- '3.9'
 env:
   matrix:
   - TOX_ENV=test
@@ -15,13 +16,17 @@ install:
 - pip install setuptools --upgrade
 script:
 - tox -e $TOX_ENV
-deploy:
-  provider: pypi
-  skip_cleanup: true
-  user: "__token__"
-  password:
-    secure: F7FzSyTUmyRmgmSHnnHrzIuVovZLplPaJwPeOtjvJ+3vYoLOd8vpbCO2+cvIfGzJAigxbc7QX3J5zSxXTioyQQ92Bb8yYkGqWD2vay64TW4waRcWHSif40b+s6/A/7cwJJru0llbPVFRXWGoBE14zzbshoD25My4pucM8JyvL4uXbXZzTKytBKSgXS7wqfdI5WivEkNvGJcuWqUoneHOvKoxjn0pbaPkFSvkRGEX6IdrloRYlBASO8juUVbeMk6a+bQTlccZ74Xbz+zfQItGO7UJTgC+pFiVbKM3VNbuU9+EktdHP/I5pRCRjICIjkWQG01jh0+WklOyfPtYZhyhRAsYzzSwMHtBaX2mwJepbiatTCwqF3PTvY6F0vQOWsVbcc9k41R+8svMgktsU4SrcybeyiQgeZk+FE4zrkysIUX0oYSBXt5ftwSBpqolhZ2ef3PepHd4y895oDwFkse/bLxYis6+UZz/LmbBUIqpzUTj/Sp9kElib/kI1QC5uEztPHfCmiNrPQjOFgnZg6Lk9IbIkYiIHrbPe3SqfgF73DxsnZsxUFZSogNAIA6qUkB5lwVz1Nt2cGZk8J7+bfvyae1y4umRrEvPBOlPPU4xqj5cyhNM7mia26+qu8RddNYvT5n4vBCcovzuRxBOeeLTY4+DreD8DairvuZlpV69DdA=
-  on:
-    tags: true
-    distributions: sdist bdist_wheel
-    condition: $TOX_ENV = test
+jobs:
+  include:
+    - stage: deploy
+      python: '3.9'
+      install: skip
+      script: skip # skip test scripts
+      deploy:
+        provider: pypi
+        skip_cleanup: true
+        user: "__token__"
+        password: ${PYPI_API_TOKEN}
+        on:
+          tags: true
+          distributions: sdist bdist_wheel
