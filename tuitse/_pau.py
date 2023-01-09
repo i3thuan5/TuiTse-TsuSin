@@ -1,4 +1,4 @@
-from 臺灣言語工具.基本物件.公用變數 import 敢是拼音字元
+from kesi.butkian.kongiong import 敢是拼音字元
 from tuitse import THAU_JI, LIAN_JI, KHIN_SIANN_JI
 
 KHANG_PEH = '\u00A0'

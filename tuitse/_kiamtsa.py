@@ -1,23 +1,24 @@
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
+from kesi import Ku
 from 用字 import 建議
 from tuitse.constant import THAU_JI, KHIN_SIANN_JI, LIAN_JI
 
 
 def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
-    kubut_han = 拆文分析器.建立句物件(hanji)
-    kubut_lo = 拆文分析器.建立句物件(lomaji)
-    jibut_han = kubut_han.篩出字物件()
-    jibut_lo = kubut_lo.篩出字物件()
+    ku_han = Ku(hanji)
+    ku_lo = Ku(lomaji)
+    ji_han = list(ku_han.thianji())
+    ji_lo = list(ku_lo.thianji())
 
     # Kí ta̍k jī tī sû-thâu a̍h sû-bué
     ji_id_tin = []
-    for su in kubut_lo.網出詞物件():
+    for su in ku_lo:
         ji_id_tin.append(THAU_JI)
 
-        ji_tin = su.篩出字物件()[1:]
+        ji_tin = list(su)[1:]
         for ji in ji_tin:
-            if ji.敢有輕聲標記():
+            if ji.si_khinsiann:
                 ji_id_tin.append(KHIN_SIANN_JI)
             else:
                 ji_id_tin.append(LIAN_JI)
@@ -26,26 +27,27 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
     dp_tin = [[], ]
     loo_tin = [[], ]
 
-    huinn_tngte = len(jibut_han)
+    huinn_tngte = len(ji_han)
     for _punso in range(huinn_tngte + 1):
         dp_tin[0].append((0, 0))
         loo_tin[0].append('toping')
-    for lo in jibut_lo:
+    for lo in ji_lo:
         tsua_dp = [(0, 0), ]
         tsua_loo = ['binting', ]
 
         for binting, tshu, han in zip(
-            dp_tin[-1][1:], dp_tin[-1], jibut_han
+            dp_tin[-1][1:], dp_tin[-1], ji_han
         ):
             try:
-                jibut = 拆文分析器.建立字物件(han.型, lo.型)
+                jibut = 拆文分析器.建立字物件(han.hanlo, lo.hanlo)
             except 解析錯誤 as e:
                 print('解析錯誤, ', e)
                 kam_u = False
             else:
                 kam_u = (pio.有這个字無(jibut) or (
-                    han.型 == lo.型 and not kam_alapik_sooji(jibut.型, jibut.音))
-                )
+                    han.hanlo == lo.hanlo
+                    and not kam_alapik_sooji(jibut.型, jibut.音)
+                ))
                 if hamsik_tsitji_ubo:
                     kam_u = kam_u or hamsik_tsitji_ubo(jibut)
             toping = tsua_dp[-1]
@@ -84,7 +86,7 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
             tit -= 1
             kiat_ko.append((
                 '',
-                jibut_lo[tit].型,
+                ji_lo[tit].hanlo,
                 ji_id_tin[tit],
                 False
             ))
@@ -92,7 +94,7 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
         elif loo_tin[tit][huinn] == 'toping':
             huinn -= 1
             kiat_ko.append((
-                jibut_han[huinn].型,
+                ji_han[huinn].hanlo,
                 '',
                 ting_id,
                 False
@@ -101,8 +103,8 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
             tit -= 1
             huinn -= 1
             kiat_ko.append((
-                jibut_han[huinn].型,
-                jibut_lo[tit].型,
+                ji_han[huinn].hanlo,
+                ji_lo[tit].hanlo,
                 ji_id_tin[tit],
                 True
             ))
@@ -111,8 +113,8 @@ def kiamtsa(hanji, lomaji, hamsik_tsitji_ubo=None, pio=建議):
             tit -= 1
             huinn -= 1
             kiat_ko.append((
-                jibut_han[huinn].型,
-                jibut_lo[tit].型,
+                ji_han[huinn].hanlo,
+                ji_lo[tit].hanlo,
                 ji_id_tin[tit],
                 False
             ))
