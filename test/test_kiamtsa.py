@@ -106,6 +106,14 @@ class KangJiSooTshiGiam(TestCase):
             ('in', 'in', KHIN_SIANN_JI, True),
         ]
 
+    def test_han_bo_khinsiann(self):
+        self.hanji = '予in'
+        self.lomaji = 'hōo--in'
+        self.bang = [
+            ('予', 'hōo', THAU_JI, True),
+            ('in', 'in', KHIN_SIANN_JI, True),
+        ]
+
 
 class BoKangJiSooTshiGiam(TestCase):
     def tearDown(self):
