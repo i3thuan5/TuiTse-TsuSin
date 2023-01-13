@@ -35,16 +35,10 @@ class TanGuanTshiGiam(TestCase):
         self.assertEqual(
             len(soup.find_all('rb')), 3
         )
-
-    def test_siangji_e_hanji(self):
-        kiatko = tuitse_html([
-            ('姑', 'koo', THAU_JI, True),
-            ('娘', 'niû', LIAN_JI, True),
-        ])
-        soup = BeautifulSoup(kiatko, "html.parser")
-        self.assertEqual(
-            len(soup.find_all('rt')), 3
-        )
+        self.assertEqual(soup.find_all('rt')[2].text, '娘', kiatko)
+        self.assertEqual(soup.find_all('rb')[2].text, 'niû', kiatko)
+        self.assertEqual(soup.find_all('rt')[1].text, '', kiatko)
+        self.assertEqual(soup.find_all('rb')[1].text, '-', kiatko)
 
     def test_khinsiann_hu(self):
         kiatko = tuitse_html([
@@ -62,9 +56,10 @@ class TanGuanTshiGiam(TestCase):
             ('niu', 'niu', LIAN_JI, True),
         ])
         soup = BeautifulSoup(kiatko, "html.parser")
-        self.assertEqual(
-            len(soup.find_all('rb')), 3
-        )
+        self.assertEqual(soup.find_all('rt')[2].text, 'niu', kiatko)
+        self.assertEqual(soup.find_all('rb')[2].text, 'niu', kiatko)
+        self.assertEqual(soup.find_all('rt')[1].text, '-', kiatko)
+        self.assertEqual(soup.find_all('rb')[1].text, '-', kiatko)
 
     def test_khinsiann_e_tsuanlo_su(self):
         kiatko = tuitse_html([
@@ -129,6 +124,18 @@ class TanGuanTshiGiam(TestCase):
         self.assertEqual(
             len(soup.find_all('ruby')), 1
         )
+
+    def test_khinsiann(self):
+        kiatko = tuitse_html([
+            ('禁', 'kìm', THAU_JI, True),
+            ('起', 'khí', KHIN_SIANN_JI, True),
+            ('來', 'lâi', LIAN_JI, True),
+        ])
+        soup = BeautifulSoup(kiatko, "html.parser")
+        self.assertEqual(soup.find_all('rt')[2].text, '起', kiatko)
+        self.assertEqual(soup.find_all('rb')[2].text, 'khí', kiatko)
+        self.assertEqual(soup.find_all('rt')[1].text, '', kiatko)
+        self.assertEqual(soup.find_all('rb')[1].text, '--', kiatko)
 
     '''
     Ē-té sī lak-jī kah tîng-tânn

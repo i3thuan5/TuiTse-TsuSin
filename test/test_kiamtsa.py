@@ -43,7 +43,7 @@ class KangJiSooTshiGiam(TestCase):
             ('kòng', 'kòng', LIAN_JI, True),
         ]
 
-    def test_hanlo_kinnkinn叫(self):
+    def test_hanlo_kinnkinn叫_羅馬字有漢字代表是華文(self):
         self.hanji = 'kinn-kinn叫'
         self.lomaji = 'kinn-kinn叫'
         self.bang = [
@@ -96,6 +96,22 @@ class KangJiSooTshiGiam(TestCase):
         self.lomaji = ','
         self.bang = [
             ('「', ',', THAU_JI, False),
+        ]
+
+    def test_han_ma_khinsiann(self):
+        self.hanji = '予--in'
+        self.lomaji = 'hōo--in'
+        self.bang = [
+            ('予', 'hōo', THAU_JI, True),
+            ('in', 'in', KHIN_SIANN_JI, True),
+        ]
+
+    def test_han_bo_khinsiann(self):
+        self.hanji = '予in'
+        self.lomaji = 'hōo--in'
+        self.bang = [
+            ('予', 'hōo', THAU_JI, True),
+            ('in', 'in', KHIN_SIANN_JI, True),
         ]
 
 
