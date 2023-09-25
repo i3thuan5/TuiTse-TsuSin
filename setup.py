@@ -25,7 +25,7 @@ setup(
         'Topic :: Text Processing :: Linguistic',
     ],
     install_requires=[
-        'kau3-tian2-iong7-ji7==2.1.*',
-        'tai5-uan5_gian5-gi2_kang1-ku7==1.1.*',
+        'kau3-tian2-iong7-ji7>=2.1.0,<4.0.0',
+        'tai5-uan5_gian5-gi2_kang1-ku7>=1.1.0,<2.0.0',
     ],
 )
