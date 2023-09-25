@@ -14,7 +14,7 @@ setup(
     url='https://ithuan.tw/',
     download_url='https://github.com/i3thuan5/TuiTse-TsuSin',
     keywords=[
-        'Parser', 'Alignment', 'Taigi', 'Hanji', 'Lomaji', 
+        'Parser', 'Alignment', 'Taigi', 'Hanji', 'Lomaji',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -25,6 +25,7 @@ setup(
         'Topic :: Text Processing :: Linguistic',
     ],
     install_requires=[
-        'kau3-tian2-iong7-ji7>=2.1.0',
+        'kau3-tian2-iong7-ji7==2.1.*',
+        'tai5-uan5_gian5-gi2_kang1-ku7==1.1.*',
     ],
 )
