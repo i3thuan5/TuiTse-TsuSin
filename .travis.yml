@@ -27,7 +27,6 @@ jobs:
       script:
       - tox -e flake8
     - stage: deploy
-      python: '3.9'
       install: skip
       script: skip # skip test scripts
       deploy:
