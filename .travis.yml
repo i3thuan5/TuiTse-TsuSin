@@ -1,25 +1,33 @@
+os: linux
 dist: jammy
 language: python
 python:
-- '3.8'
 - '3.9'
-env:
-  matrix:
-  - TOX_ENV=test
-  - TOX_ENV=flake8
 branches:
   only:
   - master
   - "/\\d+\\.\\d+\\.\\d+/"
-install:
-- pip install tox
-- pip install setuptools --upgrade
-script:
-- tox -e $TOX_ENV
 jobs:
   include:
+    - name: test
+      install:
+      - pip install tox
+      - pip install setuptools --upgrade
+      addons:
+        sonarcloud:
+          organization: "ithuan"
+          token: ${SONAR_TOKEN}
+      script:
+      - tox -e test
+      - sonar-scanner
+    - name: flake8
+      install:
+      - pip install tox
+      script:
+      - tox -e flake8
     - stage: deploy
-      python: '3.9'
+      if: branch ~= /\d+\.\d+\.\d+/
+      name: pypi
       install: skip
       script: skip # skip test scripts
       deploy:

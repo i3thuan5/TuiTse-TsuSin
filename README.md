@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/TuiTse-TsuSin.svg)](https://badge.fury.io/py/TuiTse-TsuSin)
 [![Build Status](https://travis-ci.org/i3thuan5/TuiTse-TsuSin.svg?branch=master)](https://travis-ci.org/i3thuan5/TuiTse-TsuSin)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=i3thuan5_TuiTse-TsuSin&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=i3thuan5_TuiTse-TsuSin)
 
 |M̄-tio̍h|Tio̍h|
 |-|-|
