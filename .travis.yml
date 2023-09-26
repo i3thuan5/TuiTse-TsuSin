@@ -1,8 +1,7 @@
-os: linux
 dist: jammy
-jdk: openjdk17
 language: python
 python:
+- '3.8'
 - '3.9'
 branches:
   only:
@@ -27,8 +26,7 @@ jobs:
       script:
       - tox -e flake8
     - stage: deploy
-      name: pypi
-      if: branch ~= /\d+\.\d+\.\d+/
+      python: '3.9'
       install: skip
       script: skip # skip test scripts
       deploy:
