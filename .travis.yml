@@ -1,4 +1,6 @@
+os: linux
 dist: jammy
+jdk: openjdk17
 language: python
 python:
 - '3.8'
@@ -9,17 +11,6 @@ branches:
   - "/\\d+\\.\\d+\\.\\d+/"
 jobs:
   include:
-    - name: test
-      install:
-      - pip install tox
-      - pip install setuptools --upgrade
-      addons:
-        sonarcloud:
-          organization: "ithuan"
-          token: ${SONAR_TOKEN}
-      script:
-      - tox -e test
-      - sonar-scanner
     - name: flake8
       install:
       - pip install tox
