@@ -8,18 +8,18 @@ def tuitse_html(kiamtsa_tinliat):
     tshamsoo = []
     su_html = ''
     su_tshamsoo = []
-    kam_ting_tsit_hing_si_lomaji = False
+    ting_tsit_hanlo_kam_si_lomaji = False
     kam_ting_tsit_im_si_lomaji = False
     for ji in kiamtsa_tinliat:
         # Kuat-tīng Tsit jī ê hîng ài liân-jī-hû--bô
-        kam_hing_si_lomaji = 敢是拼音字元(ji[0][-1:])
+        hanlo_kam_si_lomaji = 敢是拼音字元(ji[0][-1:])
 
-        if kam_hing_si_lomaji and kam_ting_tsit_hing_si_lomaji:
-            kam_hing_ai_lian = True
+        if hanlo_kam_si_lomaji and ting_tsit_hanlo_kam_si_lomaji:
+            hanlo_kam_ai_lian = True
         else:
-            kam_hing_ai_lian = False
+            hanlo_kam_ai_lian = False
 
-        kam_ting_tsit_hing_si_lomaji = kam_hing_si_lomaji
+        ting_tsit_hanlo_kam_si_lomaji = hanlo_kam_si_lomaji
 
         # Kuat-tīng Tsit jī ê im ài liân-jī-hû--bô
         kam_im_si_lomaji = 敢是拼音字元(ji[1][-1:])
@@ -53,7 +53,7 @@ def tuitse_html(kiamtsa_tinliat):
         else:
             su_html += "<rb>&nbsp;</rb>"
 
-        if kam_hing_ai_lian:
+        if hanlo_kam_ai_lian:
             su_html += "<rt>{}</rt>"
             su_tshamsoo.append(tiauhu)
         else:
