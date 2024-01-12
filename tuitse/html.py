@@ -9,7 +9,7 @@ def tuitse_html(kiamtsa_tinliat):
     su_html = ''
     su_tshamsoo = []
     ting_tsit_hanlo_kam_si_lomaji = False
-    kam_ting_tsit_im_si_lomaji = False
+    ting_tsit_lomaji_kam_si_lomaji = False
     for ji in kiamtsa_tinliat:
         # Kuat-tīng Tsit jī ê hîng ài liân-jī-hû--bô
         hanlo_kam_si_lomaji = 敢是拼音字元(ji[0][-1:])
@@ -22,14 +22,14 @@ def tuitse_html(kiamtsa_tinliat):
         ting_tsit_hanlo_kam_si_lomaji = hanlo_kam_si_lomaji
 
         # Kuat-tīng Tsit jī ê im ài liân-jī-hû--bô
-        kam_im_si_lomaji = 敢是拼音字元(ji[1][-1:])
+        lomaji_kam_si_lomaji = 敢是拼音字元(ji[1][-1:])
 
-        if kam_im_si_lomaji and kam_ting_tsit_im_si_lomaji:
-            kam_im_ai_lian = True
+        if lomaji_kam_si_lomaji and ting_tsit_lomaji_kam_si_lomaji:
+            lomaji_kam_ai_lian = True
         else:
-            kam_im_ai_lian = False
+            lomaji_kam_ai_lian = False
 
-        kam_ting_tsit_im_si_lomaji = kam_im_si_lomaji
+        ting_tsit_lomaji_kam_si_lomaji = lomaji_kam_si_lomaji
 
         if ji[2] == THAU_JI:
             # Thòo sû ê html
@@ -47,7 +47,7 @@ def tuitse_html(kiamtsa_tinliat):
         else:
             raise RuntimeError('一定愛設定頭字、連字、a̍h-sī輕聲')
 
-        if kam_im_ai_lian:
+        if lomaji_kam_ai_lian:
             su_html += "<rb>{}</rb>"
             su_tshamsoo.append(tiauhu)
         else:
