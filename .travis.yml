@@ -23,10 +23,10 @@ jobs:
       - tox -e test
       - >
         docker run --rm
-        -e SONARQUBE_SCANNER_PARAMS
-        -e SONAR_TOKEN="${SONAR_TOKEN}"
-        -v "`pwd`:/usr/src"
-        sonarsource/sonar-scanner-cli
+          -e SONARQUBE_SCANNER_PARAMS
+          -e SONAR_TOKEN="${SONAR_TOKEN}"
+          -v "`pwd`:/usr/src"
+          sonarsource/sonar-scanner-cli
     - name: flake8
       install:
       - pip install tox
