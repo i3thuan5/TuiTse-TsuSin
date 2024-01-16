@@ -13,13 +13,15 @@ jobs:
       install:
       - pip install tox
       - pip install setuptools --upgrade
-      addons:
-        sonarcloud:
-          organization: "ithuan"
-          token: ${SONAR_TOKEN}
+      service:
+      - docker
       script:
       - tox -e test
-      - sonar-scanner
+      - >
+        docker run --rm
+        -e SONAR_TOKEN="${SONAR_TOKEN}"
+        -v "`pwd`:/usr/src" \
+        sonarsource/sonar-scanner-cli
     - name: flake8
       install:
       - pip install tox
