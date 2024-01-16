@@ -20,7 +20,6 @@ jobs:
         sonarcloud:
           token: ${SONAR_TOKEN}
       script:
-      - printenv
       - tox -e test
       - >
         docker run --rm
