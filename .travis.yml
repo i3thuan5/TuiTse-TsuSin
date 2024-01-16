@@ -16,6 +16,7 @@ jobs:
       service:
       - docker
       script:
+      - printenv
       - tox -e test
       - >
         docker run --rm
@@ -23,6 +24,7 @@ jobs:
         -v "`pwd`:/usr/src"
         sonarsource/sonar-scanner-cli
       - cat ${TRAVIS_HOME}/.sonarscanner/sonar-scanner/conf/sonar-scanner.properties
+      - docker run --rm sonarsource/sonar-scanner-cli cat /opt/sonar-scanner/conf/sonar-scanner.properties
       addons:
         sonarcloud:
           token: ${SONAR_TOKEN}
