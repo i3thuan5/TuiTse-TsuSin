@@ -5,7 +5,9 @@ from kesi.butkian.kongiong import 敢是拼音字元
 
 def tuitse_html(kiamtsa_tinliat):
     html = ''
-    htmlsu = ''
+    tshamsoo = []
+    su_html = ''
+    su_tshamsoo = []
     kam_ting_tsit_hing_si_lomaji = False
     kam_ting_tsit_im_si_lomaji = False
     for ji in kiamtsa_tinliat:
@@ -31,10 +33,11 @@ def tuitse_html(kiamtsa_tinliat):
 
         if ji[2] == THAU_JI:
             # Thòo sû ê html
-            if htmlsu:
-                html += "<ruby>{}</ruby>".format(htmlsu)
+            if su_html:
+                html += "<ruby>{}</ruby>".format(su_html)
+                tshamsoo += su_tshamsoo
             # Html tîng-lâi
-            htmlsu = _sng_ji_html(ji)
+            su_html, su_tshamsoo = _sng_ji_html(ji)
             continue
 
         if ji[2] == LIAN_JI:
@@ -45,26 +48,33 @@ def tuitse_html(kiamtsa_tinliat):
             raise RuntimeError('一定愛設定頭字、連字、a̍h-sī輕聲')
 
         if kam_im_ai_lian:
-            htmlsu += "<rb>{}</rb>".format(tiauhu)
+            su_html += "<rb>{}</rb>"
+            su_tshamsoo.append(tiauhu)
         else:
-            htmlsu += "<rb>&nbsp;</rb>"
+            su_html += "<rb>&nbsp;</rb>"
 
         if kam_hing_ai_lian:
-            htmlsu += "<rt>{}</rt>".format(tiauhu)
+            su_html += "<rt>{}</rt>"
+            su_tshamsoo.append(tiauhu)
         else:
-            htmlsu += "<rt></rt>"
+            su_html += "<rt></rt>"
 
-        htmlsu += _sng_ji_html(ji)
+        sng_html, sng_tshamsoo = _sng_ji_html(ji)
+        su_html += sng_html
+        su_tshamsoo += sng_tshamsoo
     # Thòo bué sû ê html
-    html += "<ruby>{}</ruby>".format(htmlsu)
-    return format_html(html)
+    html += "<ruby>{}</ruby>".format(su_html)
+    tshamsoo += su_tshamsoo
+    return format_html(html, *tshamsoo)
 
 
 def _sng_ji_html(ji):
     if ji[3]:
-        return "<rb>{}</rb><rt>{}</rt>".format(ji[1], ji[0])
+        return "<rb>{}</rb><rt>{}</rt>", [ji[1], ji[0]]
     if ji[1]:
-        return "<rb class='fail'>{}</rb><rt class='fail'>{}</rt>".format(
-            ji[1], ji[0])
-    return "<rb class='fail'>&nbsp;&nbsp;</rb><rt class='fail'>{}</rt>".format(
-        ji[0])
+        return "<rb class='fail'>{}</rb><rt class='fail'>{}</rt>", [
+            ji[1], ji[0]
+        ]
+    return "<rb class='fail'>&nbsp;&nbsp;</rb><rt class='fail'>{}</rt>", [
+        ji[0]
+    ]
